@@ -1,5 +1,8 @@
 <template>
-  <div id="app">App<el-button type="primary" round>主要按钮</el-button></div>
+  <div id="app">
+    <!-- 一级路由的出口 一级路由对应组件渲染的位置(整个页面都应该被看到,要放在根级组件下) -->
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>

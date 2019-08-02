@@ -2,10 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import axios from 'axios'
 // @是一个路径的别名 是src路径( @在vue-cli项目下才有效，webpack打包时会加上这个别名 )
 // index是目录的索引文件 默认使用的索引文件
 // index.js index.vue index.json(只有此三种文件会默认加载 @绝对路径时会按此顺序获取文件)
 import router from '@/router'
+// 导入样式 (直接写路径即可 因为css js less没有返回值 不要去接收 直接导入)
+import '@/styles/index.less'
+// 挂载到Vue上
+Vue.prototype.$http = axios
 // 产品级别提示( 开发阶段提示越详细越好 开发级别提示 )
 Vue.config.productionTip = false
 Vue.use(ElementUI)
