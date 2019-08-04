@@ -3,6 +3,10 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue'
 import Login from '@/views/login'
+import Home from '@/views/home'
+import Welcome from '@/views/welcome'
+import Article from '@/views/article'
+import notFound from '@/views/404'
 // 在vue-cli中使用router必须添加Vue.use(VueRouter)
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -13,7 +17,31 @@ const router = new VueRouter({
       name: 'login',
       //   component对应的是登录组件，所以要把登录组件导入
       component: Login
-    }
+    },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: Home,
+    //   redirect: '/welcome',
+    //   children: [
+    //     {
+    //       path: '/welcome',
+    //       name: 'welcome',
+    //       component: Welcome
+    //     }
+    //   ]
+    // }
+    {
+      path: '/',
+      // name: 'home',
+      component: Home,
+      // redirect: '/welcome',
+      children: [
+        { path: '/', name: 'welcome', component: Welcome },
+        { path: '/article', name: 'article', component: Article }
+      ]
+    },
+    { path: '*', name: '404', component: notFound }
   ]
 })
 export default router

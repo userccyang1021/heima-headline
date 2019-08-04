@@ -55,8 +55,8 @@ export default {
       // 表单的数据对象
       loginForm: {
         // 根据接口规则命名
-        mobile: '',
-        code: ''
+        mobile: '13069013037',
+        code: '246810'
       },
       // 校验规则的名字
       loginRules: {
