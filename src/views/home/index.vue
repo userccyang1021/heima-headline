@@ -47,13 +47,13 @@
                 <!-- 下拉列表 -->
                 <el-dropdown class="my-dropdown">
                     <span class="el-dropdown-link">
-                        <img class='headPortrait' src="../../assets/images/avatar.jpg">
-                        下拉列表<i class="el-icon-arrow-down el-icon--right"></i>
+                        <img class='headPortrait' :src="photo">
+                        你说的对<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <!-- slot 插槽 用于封装组件 -->
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-                        <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-setting" @click.native='setting()'>个人设置</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-unlock" @click.native='logout()'>退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </el-header>
@@ -66,15 +66,36 @@
     </el-container>
 </template>
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      photo: ''
     }
+  },
+  created () {
+    const user = store.getUser()
+    // console.log(user)
+    this.name = user.name
+    this.photo = user.photo
   },
   methods: {
     toggleMenu () {
       this.isCollapse = !this.isCollapse
+    },
+    // click绑定的是原生的dom事件 绑定在组建上认为是自定义事件 组件内部没触发无效事件
+    // 解决：click绑定在组件解析后的DOM上 使用事件修饰符 native绑定原生DOM事件
+    setting () {
+    //   console.log('ok')
+      this.$router.push('/setting')
+    },
+    logout () {
+      // 1. 清除登录信息
+      store.clearUser()
+      // 2. 跳转到登录页
+      this.$router.push('/Login')
     }
   }
 }
