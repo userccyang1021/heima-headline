@@ -95,7 +95,7 @@ export default {
       // 1. 清除登录信息
       store.clearUser()
       // 2. 跳转到登录页
-      this.$router.push('/Login')
+      this.$router.push('/login')
     }
   }
 }

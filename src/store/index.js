@@ -12,6 +12,6 @@ export default {
   // 移除用户信息
   clearUser () {
     // sessionStorage.clear()清除所有用户信息
-    window.sessionStorage.clearItem(KEY)
+    window.sessionStorage.removeItem(KEY)
   }
 }
