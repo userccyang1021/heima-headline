@@ -7,6 +7,7 @@ import Home from '@/views/home'
 import Welcome from '@/views/welcome'
 import Article from '@/views/article'
 import notFound from '@/views/404'
+import Store from '@/store'
 // 在vue-cli中使用router必须添加Vue.use(VueRouter)
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -43,5 +44,13 @@ const router = new VueRouter({
     },
     { path: '*', name: '404', component: notFound }
   ]
+})
+// 设置全局前置导航守卫
+router.beforeEach((to, from, next) => {
+  // if (to.path === '/Login') return next()
+  // if (!Store.getUser().token) return next('/Login')
+  // next()
+  if (!to.path === '/Login' && !Store.getUser().token) return next('/Login')
+  next()
 })
 export default router

@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+import store from '@/store'
 export default {
   //   自定义校验：
   // - validator 指定自定义校验函数
@@ -96,20 +97,35 @@ export default {
 
     login () {
       // 1. 对表单进行整体校验
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
           // console.log('success')
           // 2. 校验成功发请求 post方法的返回值是params对象 所以可以.then
-          this.$http
-            .post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
-            .then(res => {
-              // res 是响应对象/响应报文 包含三个内容：响应状态行 响应头 响应体( 数据放在响应体里 )
-              // console.log(res.data)
-              this.$router.push('/')
-            })
-            .catch(() => {
-              this.$message.error('手机或验证码错误')
-            })
+          // this.$http
+          //   .post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+          //   .then(res => {
+          //     // res 是响应对象/响应报文 包含三个内容：响应状态行 响应头 响应体( 数据放在响应体里 )
+          //     // console.log(res.data)
+          //     // 存储用户信息(store为对象)
+          //     store.setUser(res.data.data)
+          //     this.$router.push('/')
+          //   })
+          //   .catch(() => {
+          //     this.$message.error('手机或验证码错误')
+          //   })
+          // - axios是基于promise封装的
+          // - promise处理异步代码，让异步代码可读性更高。
+          // - async await 更加优雅的书写异步代码
+          // async await 请求基于promise   async await是函数的修饰符
+          // 返回值是promise对象  如果加上await关键字修饰  返回值是then的参数（返回的数据）
+          // 注：await关键字必须写在async修饰函数内
+          try {
+            const { data: { data } } = await this.$http.post('authorizations', this.loginForm)
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机或验证码错误')
+          }
         }
       })
     }
