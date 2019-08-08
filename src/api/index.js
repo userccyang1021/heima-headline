@@ -1,8 +1,18 @@
 // 配置axios
 import axios from 'axios'
 import Store from '@/store'
+import JSONBIG from 'json-bigint'
 // 基准路径
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
+axios.defaults.transformResponse = [(data) => {
+  // data为json原始数据 对data进行转化 return后的值为转化后的结果
+  try {
+    return JSONBIG.parse(data)
+  } catch (e) {
+    // 如果data为空时 直接返回 不需要转换
+    return data
+  }
+}]
 // 请求头字段
 // 此代码只能拿一次token
 // axios.defaults.headers = {
