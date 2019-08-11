@@ -10,6 +10,7 @@ import notFound from '@/views/404'
 import Store from '@/store'
 import Image from '@/views/image'
 import Publish from '@/views/publish'
+import Comment from '@/views/comment'
 // 在vue-cli中使用router必须添加Vue.use(VueRouter)
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -43,7 +44,8 @@ const router = new VueRouter({
         { path: '/', name: 'welcome', component: Welcome },
         { path: '/article', name: 'article', component: Article },
         { path: '/image', name: 'image', component: Image },
-        { path: '/publish', name: 'publish', component: Publish }
+        { path: '/publish', name: 'publish', component: Publish },
+        { path: '/comment', name: 'comment', component: Comment }
       ]
     },
     { path: '*', name: '404', component: notFound }

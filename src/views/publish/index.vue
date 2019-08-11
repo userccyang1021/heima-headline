@@ -98,7 +98,7 @@ export default {
   },
   watch: {
     // 注：监听data中的数据变化，this.$route属于响应式数据
-    $$route () {
+    $route () {
       if (!this.$route.query.id) {
         this.articleId = null
         this.articleForm = {
