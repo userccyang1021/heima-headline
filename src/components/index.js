@@ -4,6 +4,7 @@
 import MyTest from '@/components/my-test'
 import MyBread from '@/components/my-bread'
 import Mychannel from '@/components/my-channel'
+import MyImage from '@/components/my-image'
 export default {
   install (Vue) {
     // Vue.use(使用插件) Vue就是你use前的Vue(谁使用这个插件，Vue就是谁)
@@ -11,5 +12,6 @@ export default {
     Vue.component(MyBread.name, MyBread)
     Vue.component(MyTest.name, MyTest)
     Vue.component(Mychannel.name, Mychannel)
+    Vue.component(MyImage.name, MyImage)
   }
 }

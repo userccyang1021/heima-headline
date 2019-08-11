@@ -8,6 +8,8 @@ import Welcome from '@/views/welcome'
 import Article from '@/views/article'
 import notFound from '@/views/404'
 import Store from '@/store'
+import Image from '@/views/image'
+import Publish from '@/views/publish'
 // 在vue-cli中使用router必须添加Vue.use(VueRouter)
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -39,7 +41,9 @@ const router = new VueRouter({
       // redirect: '/welcome',
       children: [
         { path: '/', name: 'welcome', component: Welcome },
-        { path: '/article', name: 'article', component: Article }
+        { path: '/article', name: 'article', component: Article },
+        { path: '/image', name: 'image', component: Image },
+        { path: '/publish', name: 'publish', component: Publish }
       ]
     },
     { path: '*', name: '404', component: notFound }
